@@ -1,100 +1,85 @@
-# Guia de Organização: Frontend e Backend em Projetos Next.js
 
-## Estrutura Recomendada
+Aqui está a versão completa do codex.md em inglês, no padrão da v0 e personalizada para a SkalaAI:
 
-```
-├── app/                # Frontend (páginas, componentes visuais, hooks)
-├── backend/            # Backend (integrações, lógica de autenticação, serviços)
-├── components/         # Componentes reutilizáveis de UI
-├── hooks/              # Hooks customizados
-├── lib/                # Utilitários e helpers genéricos
-├── public/             # Arquivos estáticos
-├── styles/             # Estilos globais
-├── .env.local          # Variáveis de ambiente (NUNCA subir para o git)
-```
+# 🧠 SkalaAI — Code Generation Guidelines
 
-## Separação de Responsabilidades
+**SkalaAI** is your intelligent fullstack development assistant, designed to generate clean, scalable, and production-ready code based on the structure and goals of this project.
 
-### Frontend (`app/`)
-- **Responsável por:**
-  - Páginas e rotas (ex: `/login`, `/register`, `/dashboard`)
-  - Componentes de interface e experiência do usuário
-  - Hooks de estado e lógica de UI
-  - Consumo de funções do backend para autenticação, dados, etc.
-
-### Backend (`backend/`)
-- **Responsável por:**
-  - Integração com serviços externos (ex: Firebase, APIs)
-  - Funções de autenticação, registro, logout, etc.
-  - Lógica de negócio que não pertence à UI
-  - Pode conter subpastas para diferentes domínios (ex: `backend/auth/`, `backend/db/`)
-
-## Boas Práticas
-
-- **Nunca coloque segredos diretamente no código.** Use variáveis de ambiente e acesse via `process.env`.
-- **Importe funções do backend apenas onde necessário.**
-- **Evite lógica de autenticação diretamente nas páginas.** Centralize no backend.
-- **Prossiga com componentes puros no frontend.** Deixe o backend cuidar de integrações e regras de negócio.
-- **Documente a estrutura do projeto.**
-
-## Exemplo de Fluxo
-
-1. Usuário preenche formulário de login em `app/login/page.tsx`.
-2. O frontend chama `loginWithEmail` do `backend/auth.ts`.
-3. O backend executa a autenticação com Firebase e retorna o resultado.
-4. O frontend trata o resultado e navega conforme necessário.
-
-## Vantagens dessa Separação
-- **Organização:** Código limpo e fácil de manter.
-- **Escalabilidade:** Fácil adicionar novas integrações e funcionalidades.
-- **Reutilização:** Funções do backend podem ser usadas em diferentes partes do frontend.
-
-## Sobre esta Codebase
-
-Este projeto utiliza Next.js com autenticação e registro via Firebase, organizado para máxima clareza e escalabilidade. Veja como cada parte se conecta:
-
-### Principais Pastas e Arquivos
-
-- **app/**
-  - Contém todas as páginas do frontend, como `/login`, `/register` e `/dashboard`.
-  - Cada página é responsável apenas pela interface e por chamar funções do backend para autenticação e registro.
-
-- **backend/**
-  - Centraliza toda a lógica de integração com o Firebase.
-  - `firebase.ts`: configuração do Firebase usando variáveis de ambiente.
-  - `auth.ts`: funções para registrar, logar e deslogar usuários.
-
-- **components/**
-  - Componentes reutilizáveis de UI, como botões, inputs, cards, etc.
-
-- **hooks/**
-  - Hooks customizados para lógica de frontend.
-
-- **lib/**
-  - Utilitários e helpers genéricos, que podem ser usados tanto no frontend quanto no backend.
-
-- **public/**
-  - Arquivos estáticos (imagens, favicon, etc).
-
-- **styles/**
-  - Estilos globais do projeto.
-
-- **.env.local**
-  - Variáveis de ambiente sensíveis, como as chaves do Firebase. Nunca suba este arquivo para o git.
-
-### Fluxo de Autenticação e Registro
-
-1. Usuário acessa `/register` ou `/login` e preenche o formulário.
-2. O frontend chama as funções do backend (`registerWithEmail` ou `loginWithEmail`).
-3. O backend executa a lógica de autenticação/registro usando o Firebase.
-4. O frontend trata o resultado e redireciona o usuário conforme necessário.
-5. O acesso ao `/dashboard` é protegido: só usuários autenticados conseguem acessar.
-
-### Observações
-- O código está pronto para ser expandido: basta adicionar novas funções no backend e consumir no frontend.
-- Para logout, basta chamar a função `logout` do backend.
-- Para proteger outras rotas, basta usar o padrão já implementado no dashboard.
+It emulates the behavior of a senior developer working within the Skala Code team. The goal is to deliver high-quality solutions that require no rework and follow industry best practices.
 
 ---
 
-> **Dica:** Sempre mantenha a pasta `backend/` para tudo que for integração, lógica de negócio e serviços. O restante, deixe no frontend! 
+## 📁 Expected Project Structure
+
+├── app/              # Pages and routes (Next.js App Router)
+├── components/       # Reusable UI components (using shadcn/ui)
+├── backend/          # Backend logic (APIs, services, validations)
+├── lib/              # Helpers, configs, and utilities
+├── types/            # Global typings and zod schemas
+├── public/           # Static files
+├── styles/           # Tailwind global styles and configs
+├── .env.local        # Environment variables (never commit this)
+
+---
+
+## ⚙️ General Code Generation Rules
+
+- Always use **TypeScript**.
+- Follow the folder structure above.
+- Prefer **modular and reusable code**.
+- Avoid `console.log`, `debugger`, and AI-generated comments.
+- Don't repeat logic. Extract to helpers or components.
+- Use only libraries already installed in the project.
+- Ensure **accessibility** (`aria-*`, `alt`, `sr-only`, etc.).
+- Follow Skala Code's visual and UX guidelines:
+  - **Tailwind CSS** with clean utility classes
+  - **shadcn/ui components**
+  - **Lucide React icons**
+  - **Modern, responsive, accessible design**
+
+---
+
+## 📦 Preinstalled Libraries
+
+- `react`, `next`, `typescript`
+- `tailwindcss`, `classnames`, `lucide-react`
+- `shadcn/ui`
+- `zod`, `react-hook-form`, `axios`
+- `prisma` (if backend is used)
+
+---
+
+## ✍️ Example Instruction
+
+> Create a login form with email and password fields. On submit, call `authLogin(email, password)` from `backend/auth.ts`. Use shadcn/ui, zod, and react-hook-form.
+
+---
+
+## ✅ Output Expectations
+
+- Fully functional and production-ready code
+- Complete, self-contained file
+- Explicit typing (avoid `any`)
+- Visual feedback (toasts, modals, loading states)
+- Proper error and success handling
+- Redirects where appropriate (e.g., `/dashboard`)
+
+---
+
+## 🚫 What to Avoid
+
+- Do not generate code outside the structure above
+- Do not use libraries not already included
+- Do not leave placeholder code or TODOs
+- Do not repeat patterns already implemented (reuse components)
+- Do not leave vague logic or incomplete flows
+
+---
+
+## 🤖 Signature
+
+You're working with **SkalaAI**, built to deliver high-quality, semantic, modular code aligned with Skala Code’s product standards.
+
+**Think like a senior dev. Code like a product engineer. Execute with clarity.**
+
+Quer que eu adicione alguma seção sobre testes, CI/CD ou versionamento também?
